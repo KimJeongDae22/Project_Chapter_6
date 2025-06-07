@@ -14,7 +14,7 @@ public class ItemSlot : MonoBehaviour
     public Outline QuipOutline => _quipOutline;
 
     [SerializeField] private bool _emptySlot = false;
-    void Start()
+    void Awake()
     {
         _inventory = GetComponentInParent<UI_Inventory>();
         _itemIcon = this.transform.GetChild(0).GetComponent<Image>();
