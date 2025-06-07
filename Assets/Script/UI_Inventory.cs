@@ -24,12 +24,14 @@ public class UI_Inventory : MonoBehaviour
         // UI 에 있는 아이템 슬롯만큼 리스트로 생성
         _slots = _itemSlot.GetComponentsInChildren<ItemSlot>().ToList();
 
-        for (int i = 0; i < _slots.Count - 1; i++)
+        for (int i = 0; i < _slots.Count; i++)
         {
-            if (_playerInven.InvenList.Count > 0)
+            if (i < _playerInven.InvenList.Count)
             {
                 // 플레이어 인벤에서 정보를 가져와 인벤 슬롯에 설정
+                Debug.Log(_slots.Count);
                 Debug.Log(_playerInven.InvenList.Count);
+                Debug.Log(i);
                 _slots[i].SetDataItemSlot(_playerInven.InvenList[i]);
                 _slots[i].Set();
             }

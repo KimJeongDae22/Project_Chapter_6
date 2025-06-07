@@ -6,7 +6,6 @@ public class ItemSlot : MonoBehaviour
 {
     [SerializeField] private ItemData _itemData;
     [SerializeField] private Image _itemIcon;
-    private Image _emptyIcon;
     [SerializeField] private TextMeshProUGUI _itemQuantity;
     [SerializeField] private Outline _quipOutline;
     [SerializeField] private UI_Inventory _inventory;
@@ -19,7 +18,7 @@ public class ItemSlot : MonoBehaviour
     {
         _inventory = GetComponentInParent<UI_Inventory>();
         _itemIcon = this.transform.GetChild(0).GetComponent<Image>();
-        _emptyIcon = this.transform.GetChild(0).GetComponent<Image>();
+        _itemIcon.enabled = false;
         _itemQuantity = GetComponent<TextMeshProUGUI>();
         _quipOutline = GetComponent<Outline>();
     }
@@ -28,26 +27,29 @@ public class ItemSlot : MonoBehaviour
         if (_itemData == null)
         {
             Clear();
-            return;
         }
-        _itemIcon.sprite = _itemData.GetIconSprite();
-        _quipOutline.enabled = _itemData.GetEquiped();
+        else
+        {
+            _itemIcon.enabled = true;
+            _itemIcon.sprite = _itemData.GetIconSprite();
+            _quipOutline.enabled = _itemData.GetEquiped();
 
-        int quantity = _itemData.GetQuantity();
-        _itemQuantity.text = quantity > 1 ? quantity.ToString() : string.Empty;
+            int quantity = _itemData.GetQuantity();
+            //_itemQuantity.text = quantity > 1 ? quantity.ToString() : string.Empty;
+        }
     }
     public void Clear()
     {
         _itemData = null;
-        _itemIcon = _emptyIcon;
-        _itemQuantity.text = string.Empty;
+        _itemIcon.enabled = false;
+        //_itemQuantity.text = string.Empty;
     }
     public void SetDataItemSlot(ItemData data)
     {
         if (data == null)
         {
+            _itemData = null;
             _emptySlot = true;
-            return;
         }
         else
         {
