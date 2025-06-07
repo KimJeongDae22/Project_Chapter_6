@@ -26,15 +26,29 @@ public class UI_Inventory : MonoBehaviour
 
         for (int i = 0; i < _slots.Count; i++)
         {
-            if (i < _playerInven.InvenList.Count)
+            Debug.Log(_slots.Count);
+            Debug.Log(_playerInven.InvenList.Count);
+            Debug.Log(i);
+            // 플레이어가 가지고 있는 아이템이 최소 1개 and 플레이어 인벤 인덱스 초과 방지
+            if (_playerInven.InvenList.Count > 0 && i < _playerInven.InvenList.Count)
             {
-                // 플레이어 인벤에서 정보를 가져와 인벤 슬롯에 설정
-                Debug.Log(_slots.Count);
-                Debug.Log(_playerInven.InvenList.Count);
-                Debug.Log(i);
-                _slots[i].SetDataItemSlot(_playerInven.InvenList[i]);
-                _slots[i].Set();
+                // 리스트 공간은 있지만 안에 데이터가 없을 경우의 예외 처리(데이터 X, 소지 개수 0)
+                if (_playerInven.InvenList[i].GetItemData() != null && _playerInven.InvenList[i].GetItemQuantity() > 0)
+                {
+                    // 플레이어 인벤에서 정보를 가져와 인벤 슬롯에 설정
+                    Debug.Log("소지 개수 : " + _playerInven.InvenList[i].GetItemQuantity());
+                    _slots[i].SetDataItemSlot(_playerInven.InvenList[i]); 
+                }
+                else
+                {
+                    _slots[i].SetDataItemSlot(null);
+                }
             }
+            else
+            {
+                _slots[i].SetDataItemSlot(null);
+            }
+            _slots[i].Set();
         }
     }
     void Update()

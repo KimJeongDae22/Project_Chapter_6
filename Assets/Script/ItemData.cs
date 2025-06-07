@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public enum ItemType
 {
@@ -10,6 +11,7 @@ public enum ConsumType
     HpHeal,
     ManaHeal
 }
+[Serializable]
 public class ItemDataConsumAble
 {
     [SerializeField] private ConsumType type;
@@ -28,7 +30,6 @@ public class ItemData : ScriptableObject
     [SerializeField] private string _info;
     [SerializeField] private ItemType _type;
     [SerializeField] private Sprite _icon;
-    [SerializeField] private int _quantity;
 
     [Header("복수 소지 가능")]
     [SerializeField] private bool _stackAble;
@@ -49,8 +50,6 @@ public class ItemData : ScriptableObject
     { return _type; }
     public Sprite GetIconSprite()
     { return _icon; }
-    public int GetQuantity()
-    { return _quantity; }
     public bool GetStackAble()
     { return _stackAble; }
     public int GetMaxStackAmount()
