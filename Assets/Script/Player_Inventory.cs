@@ -7,14 +7,9 @@ public class Player_Inventory : MonoBehaviour
     public List<ItemData> InvenList => _invenList;
     void Start()
     {
-
     }
 
     void Update()
     {
-    }
-    public ItemData GetPlayerItem(int index)
-    { 
-        return _invenList[index]; 
     }
 }

@@ -28,7 +28,7 @@ public class ItemData : ScriptableObject
     [SerializeField] private string _info;
     [SerializeField] private ItemType _type;
     [SerializeField] private Sprite _icon;
-    [SerializeField] private GameObject _dropItem;
+    [SerializeField] private int _quantity;
 
     [Header("복수 소지 가능")]
     [SerializeField] private bool _stackAble;
@@ -38,16 +38,25 @@ public class ItemData : ScriptableObject
     [SerializeField] private ItemDataConsumAble[] _consumAbles;
 
     [Header("장착")]
-    [SerializeField] private GameObject _equipPrefab;
+    [SerializeField] private bool _equiped;
 
-
-    public string GetName() { return _itemName; }
-    public string GetInfo() { return _info; }
-    public ItemType GetItemType() { return _type; }
-    public Sprite GetIcon() { return _icon; }
-    public bool GetStackAble() { return _stackAble; }
-    public int GetMaxStackAmount() { return _maxStackAmount; }
-    public GameObject DropItem() { return _dropItem; }
-    public ItemDataConsumAble[] GetConsumAbles() { return _consumAbles; }
-    public GameObject GetEquipPrefab() { return _equipPrefab; }
+    
+    public string GetName()
+    { return _itemName; }
+    public string GetInfo()
+    { return _info; }
+    public ItemType GetItemType()
+    { return _type; }
+    public Sprite GetIconSprite()
+    { return _icon; }
+    public int GetQuantity()
+    { return _quantity; }
+    public bool GetStackAble()
+    { return _stackAble; }
+    public int GetMaxStackAmount()
+    { return _maxStackAmount; }
+    public ItemDataConsumAble[] GetConsumAbles()
+    { return _consumAbles; }
+    public bool GetEquiped()
+    { return _equiped; }
 }

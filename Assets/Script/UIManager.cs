@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
-    public Player_Inventory inventory;
+    private Player_Inventory _inventory;
     private void Start()
     {
 
