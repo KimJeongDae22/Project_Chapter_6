@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UI_Inventory : MonoBehaviour
@@ -15,7 +16,7 @@ public class UI_Inventory : MonoBehaviour
         InvenUpdate();
     }
 
-    void InvenUpdate()
+    public void InvenUpdate()
     {
         if (_slots == null)
         {
@@ -51,11 +52,51 @@ public class UI_Inventory : MonoBehaviour
             _slots[i].Set();
         }
     }
+    public void AddItem(Item item)
+    {
+        // 장착 장비가 아닌 경우
+        if (item.GetItemData().GetItemType() != ItemType.EquipAble)
+        {
+            bool added = false;
+            // 추가하려는 아이템이 플레이어 인벤에 이미 존재하는지 확인
+            for (int i = 0; i < _playerInven.InvenList.Count; i++)
+            {
+                Item checkedItem = _playerInven.InvenList[i];
+                if (checkedItem.GetItemData() == item.GetItemData())
+                {
+                    if (checkedItem.GetItemData().GetStackAble())
+                    {
+                        checkedItem.SetItemQuantity(checkedItem.GetItemQuantity() + 1);
+                        added = true;
+                    }
+                }
+            }
+            // 추가하려는 아이템이 기존에 없는 아이템인 경우
+            if (added == false)
+            {
+                _playerInven.InvenList.Add(item);
+            }
+        }
+        // 장착 장비인 경우
+        else
+        {
+            _playerInven.InvenList.Add(item);
+        }
+        InvenUpdate();
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             InvenUpdate();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            AddItem(Singleton<ItemDictionary>.Instance.GetItemOfDictionary(0));
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            AddItem(Singleton<ItemDictionary>.Instance.GetItemOfDictionary(1));
         }
     }
 }

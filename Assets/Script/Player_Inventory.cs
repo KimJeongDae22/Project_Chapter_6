@@ -12,17 +12,12 @@ public class Item
     { return _itemData; }
     public int GetItemQuantity()
     { return _itemQuantity; }
+    public void SetItemQuantity(int a)
+        { _itemQuantity = a; }
 }
 
 public class Player_Inventory : MonoBehaviour
 {
     [SerializeField] private List<Item> _invenList;
     public List<Item> InvenList => _invenList;
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-    }
 }
