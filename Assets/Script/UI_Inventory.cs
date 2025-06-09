@@ -7,9 +7,10 @@ public class UI_Inventory : MonoBehaviour
 {
     [SerializeField] private Transform _itemSlot;
     [SerializeField] private Player_Inventory _playerInven;
-
+    [SerializeField] private int _addSlotNum = 5;
     [SerializeField] private GameObject _slotPrefab;
-    private int _addSlotNum = 5;
+    [SerializeField] private RectTransform _slotContent;
+
 
     [Header("아이템 슬롯")]
     [SerializeField] private List<ItemSlot> _slots;
@@ -95,6 +96,8 @@ public class UI_Inventory : MonoBehaviour
         {
             GameObject.Instantiate(_slotPrefab).transform.SetParent(_itemSlot.transform);
         }
+        int contentHeight = _slots.Count / 4;
+        _slotContent.sizeDelta = new Vector2(_slotContent.rect.width, 165 + contentHeight * 145);
     }
     void Update()
     {

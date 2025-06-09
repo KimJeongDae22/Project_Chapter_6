@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class ItemDictionary : Singleton<ItemDictionary>
 {
-    [SerializeField] private List<Item> itemDictionary;
+    [SerializeField] private List<Item> itemDictionary = new List<Item>();
 
     public Item GetItemOfDictionary(int itemCodeIndex)
     {
