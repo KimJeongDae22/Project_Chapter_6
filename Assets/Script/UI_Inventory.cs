@@ -6,14 +6,17 @@ using UnityEngine.UI;
 
 public class UI_Inventory : Singleton<UI_Inventory>
 {
+    [Header("골드")]
+    [SerializeField] private TextMeshProUGUI _playerGold;
     [Header("SlotBG")]
     [SerializeField] private Transform _itemSlot;
     [SerializeField] private Player_Inventory _playerInven;
-    [SerializeField] private int _addSlotNum = 5;
+    [SerializeField] private int _addSlotNum;
     [SerializeField] private GameObject _slotPrefab;
     [SerializeField] private RectTransform _slotContent;
 
     [Header("InfoBG")]
+    [SerializeField] private int _selectedItemIndex;
     [SerializeField] private Image _selectedItemIcon;
     [SerializeField] private TextMeshProUGUI _selectedItemName;
     [SerializeField] private TextMeshProUGUI _selectedItemType;
@@ -29,13 +32,13 @@ public class UI_Inventory : Singleton<UI_Inventory>
     void Start()
     {
         _playerInven = Singleton<Player>.Instance.Inventory;
-        InvenUpdate();
+        SlotUpdate();
     }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            InvenUpdate();
+            SlotUpdate();
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -46,7 +49,7 @@ public class UI_Inventory : Singleton<UI_Inventory>
             AddItem(Singleton<ItemDictionary>.Instance.GetItemOfDictionary(1));
         }
     }
-    public void InvenUpdate()
+    public void SlotUpdate()
     {
         if (_slots == null)
         {
@@ -64,18 +67,19 @@ public class UI_Inventory : Singleton<UI_Inventory>
                 if (_playerInven.InvenList[i].ItemData != null && _playerInven.InvenList[i].ItemQuantity > 0)
                 {
                     // 플레이어 인벤에서 정보를 가져와 인벤 슬롯에 설정
-                    _slots[i].SetDataItemSlot(_playerInven.InvenList[i]);
+                    _slots[i].SetDataItemSlot(_playerInven.InvenList[i], i);
                 }
                 else
                 {
-                    _slots[i].SetDataItemSlot(null);
+                    _slots[i].SetDataItemSlot(null, i);
                 }
             }
             else
             {
-                _slots[i].SetDataItemSlot(null);
+                _slots[i].SetDataItemSlot(null, i);
             }
             _slots[i].Set();
+            _playerGold.text = _playerInven.InvenGold.ToString() + " G";
         }
     }
     public void AddItem(Item item)
@@ -112,7 +116,38 @@ public class UI_Inventory : Singleton<UI_Inventory>
         {
             AddSlots();
         }
-        InvenUpdate();
+        SlotUpdate();
+    }
+    public void Btn_SellItem()
+    {
+        Item item = _slots[_selectedItemIndex].Item;
+        int itemgold = _playerInven.InvenList[_selectedItemIndex].ItemData.GetGold();
+        if (item.ItemData != null)
+        {
+            if (item.ItemData.GetItemType() == ItemType.EquipAble)
+            {
+                //todo : 장착 중에 판매할 경우 상승한 능력치 감소
+
+                _playerInven.SetInvenGold(_playerInven.InvenGold + itemgold);
+                _playerInven.DeletInvenItem(_selectedItemIndex);
+                InfoClear();
+            }
+            else
+            {
+                if (item.ItemQuantity > 1)
+                {
+                    _playerInven.InvenList[_selectedItemIndex].SetItemQuantity(item.ItemQuantity - 1);
+                    _playerInven.SetInvenGold(_playerInven.InvenGold + itemgold);
+                    InfoUpdate(_playerInven.InvenList[_selectedItemIndex], _selectedItemIndex);
+                }
+                else
+                {
+                    _playerInven.DeletInvenItem(_selectedItemIndex);
+                    InfoClear();
+                }
+            }
+            SlotUpdate();
+        }
     }
     public void AddSlots()
     {
@@ -125,12 +160,13 @@ public class UI_Inventory : Singleton<UI_Inventory>
         int contentHeight = _slots.Count / _addSlotNum;
         _slotContent.sizeDelta = new Vector2(_slotContent.rect.width, 165 + contentHeight * 145);
     }
-    public void Btn_ItemSlotClick(Item item)
+    public void InfoUpdate(Item item, int index)
     {
         if (item.ItemData != null)
         {
             _selectedItemIcon.sprite = item.ItemData.GetIconSprite();
             _selectedItemIcon.enabled = true;
+            _selectedItemIndex = index;
             _selectedItemName.text = item.ItemData.GetName();
             _selectedItemInfo.text = item.ItemData.GetInfo();
             if (item.ItemData.GetItemType() == ItemType.EquipAble)
@@ -143,6 +179,18 @@ public class UI_Inventory : Singleton<UI_Inventory>
                 _selectedItemStat.text = $"소지 개수 : {item.ItemQuantity}";
                 _btnEquip.SetActive(false);
             }
+            _btnSell.SetActive(true);
         }
+        
+    }
+    void InfoClear()
+    {
+        _selectedItemIcon.enabled = false;
+        _selectedItemIndex = 0;
+        _selectedItemName.text = string.Empty;
+        _selectedItemInfo.text = string.Empty;
+        _selectedItemStat.text = string.Empty;
+        _btnEquip.SetActive(false);
+        _btnSell.SetActive(false);
     }
 }

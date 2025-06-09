@@ -5,11 +5,13 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     [SerializeField] private Item _item;
+    [SerializeField] private int _itemIndex;
     [SerializeField] private Image _itemIcon;
     [SerializeField] private TextMeshProUGUI _itemQuantity;
     [SerializeField] private Outline _quipOutline;
     [SerializeField] private UI_Inventory _inventory;
     public Item Item => _item;
+    public int ItemIndex => _itemIndex;
     public Image ItemIcon => _itemIcon;
     public Outline QuipOutline => _quipOutline;
 
@@ -61,7 +63,7 @@ public class ItemSlot : MonoBehaviour
             _itemQuantity.text = string.Empty;
         }
     }
-    public void SetDataItemSlot(Item data)
+    public void SetDataItemSlot(Item data, int index)
     {
         if (data == null)
         {
@@ -71,13 +73,14 @@ public class ItemSlot : MonoBehaviour
         else
         {
             _item = data;
+            _itemIndex = index; 
         }
     }
     public void Btn_SlotClick()
     {
         if (_item != null)
         {
-            Singleton<UI_Inventory>.Instance.Btn_ItemSlotClick(_item);
+            Singleton<UI_Inventory>.Instance.InfoUpdate(_item, _itemIndex);
         }
     }
 }

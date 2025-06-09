@@ -30,6 +30,7 @@ public class ItemData : ScriptableObject
     [SerializeField] private string _info;
     [SerializeField] private ItemType _type;
     [SerializeField] private Sprite _icon;
+    [SerializeField] private int _gold;
 
     [Header("복수 소지 가능")]
     [SerializeField] private bool _stackAble;
@@ -48,15 +49,13 @@ public class ItemData : ScriptableObject
     public int EquipStatDeviation => _equipStatDeviation;
 
     // 아이템 도감에 들어가는 평균적인 장비 능력치 (장비가 생성될 때 장비 능력치가 조금씩 다르도록 설정)
-    public float EquipAverageArm => _equipAverageArm;
-    public float EquipAverageCri => _equipAverageCri;
-
     public float GetEquipAverageAtk()
     { return _equipAverageAtk; }
     public float GetEquipAverageArm()
     { return _equipAverageArm; }
     public float GetEquipAverageCri()
     { return _equipAverageCri; }
+
     public string GetName()
     { return _itemName; }
     public string GetInfo()
@@ -65,6 +64,8 @@ public class ItemData : ScriptableObject
     { return _type; }
     public Sprite GetIconSprite()
     { return _icon; }
+    public int GetGold()
+    { return _gold; }
     public bool GetStackAble()
     { return _stackAble; }
     public int GetMaxStackAmount()

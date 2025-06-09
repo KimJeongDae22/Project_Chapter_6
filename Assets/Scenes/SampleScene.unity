@@ -3415,6 +3415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _invenList: []
+  _invenGold: 1000
 --- !u!114 &1453035659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3700,21 +3701,24 @@ MonoBehaviour:
   - _itemData: {fileID: 11400000, guid: 4a531c3999851b14a93184fe3e3f4439, type: 2}
     _itemQuantity: 1
     _stat:
-      _addAtk: 10
-      _addArm: 0
-      _addCri: 10
+      _equipAtk: 0
+      _equipArm: 0
+      _equipCri: 0
+    _isEquipped: 0
   - _itemData: {fileID: 11400000, guid: ae4bb46c30677dc4998b11e2e17b9194, type: 2}
     _itemQuantity: 1
     _stat:
-      _addAtk: 0
-      _addArm: 0
-      _addCri: 0
+      _equipAtk: 0
+      _equipArm: 0
+      _equipCri: 0
+    _isEquipped: 0
   - _itemData: {fileID: 11400000, guid: 9199e71dc289b1046ba4319603fe9a2d, type: 2}
     _itemQuantity: 1
     _stat:
-      _addAtk: 0
-      _addArm: 0
-      _addCri: 0
+      _equipAtk: 0
+      _equipArm: 0
+      _equipCri: 0
+    _isEquipped: 0
 --- !u!4 &1625197667
 Transform:
   m_ObjectHideFlags: 0
@@ -4982,6 +4986,7 @@ MonoBehaviour:
   _addSlotNum: 4
   _slotPrefab: {fileID: 5885770076106608932, guid: 9ee07c7b26b58ec459b9082944c5d95a, type: 3}
   _slotContent: {fileID: 1157170289}
+  _selectedItemSlot: {fileID: 0}
   _selectedItemIcon: {fileID: 1897927520}
   _selectedItemName: {fileID: 1645202891}
   _selectedItemType: {fileID: 1326433214}
@@ -5012,7 +5017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 655146056163842537, guid: 9ee07c7b26b58ec459b9082944c5d95a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 655146056163842537, guid: 9ee07c7b26b58ec459b9082944c5d95a, type: 3}
       propertyPath: m_AnchorMin.x
@@ -5020,15 +5025,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 655146056163842537, guid: 9ee07c7b26b58ec459b9082944c5d95a, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 655146056163842537, guid: 9ee07c7b26b58ec459b9082944c5d95a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 655146056163842537, guid: 9ee07c7b26b58ec459b9082944c5d95a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 655146056163842537, guid: 9ee07c7b26b58ec459b9082944c5d95a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5060,11 +5065,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 655146056163842537, guid: 9ee07c7b26b58ec459b9082944c5d95a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 82.5
       objectReference: {fileID: 0}
     - target: {fileID: 655146056163842537, guid: 9ee07c7b26b58ec459b9082944c5d95a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -82.5
       objectReference: {fileID: 0}
     - target: {fileID: 655146056163842537, guid: 9ee07c7b26b58ec459b9082944c5d95a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
