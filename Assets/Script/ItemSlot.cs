@@ -34,7 +34,7 @@ public class ItemSlot : MonoBehaviour
         {
             _itemIcon.enabled = true;
             _itemIcon.sprite = _item.ItemData.GetIconSprite();
-            //_quipOutline.enabled = _item.ItemData.GetEquiped();
+            _quipOutline.enabled = _item.IsEquipped;
 
             int quantity = _item.ItemQuantity;
             // 소지량이 1개면 미표시, 1000개 이상이면 "+999" 로 표시해주는 함수
@@ -73,14 +73,19 @@ public class ItemSlot : MonoBehaviour
         else
         {
             _item = data;
-            _itemIndex = index; 
+            _itemIndex = index;
         }
     }
     public void Btn_SlotClick()
     {
         if (_item != null)
         {
-            Singleton<UI_Inventory>.Instance.InfoUpdate(_item, _itemIndex);
+            if (_item.ItemData != null)
+            { Singleton<UI_Inventory>.Instance.InfoUpdate(_item, _itemIndex); }
+        }
+        else
+        {
+            Singleton<UI_Inventory>.Instance.InfoClear();
         }
     }
 }

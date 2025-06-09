@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 30
   m_Viewport: {fileID: 1551092041}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 571038800}
@@ -2762,7 +2762,7 @@ GameObject:
   - component: {fileID: 1162781568}
   - component: {fileID: 1162781567}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Btn_EscInven
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3345,7 +3345,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1443217945}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2147283128}
+        m_TargetAssemblyTypeName: UI_Inventory, Assembly-CSharp
+        m_MethodName: Btn_SellItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1443217945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3395,6 +3407,7 @@ GameObject:
   - component: {fileID: 1453035660}
   - component: {fileID: 1453035659}
   - component: {fileID: 1453035658}
+  - component: {fileID: 1453035661}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3429,6 +3442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventory: {fileID: 0}
+  _stat: {fileID: 0}
 --- !u!4 &1453035660
 Transform:
   m_ObjectHideFlags: 0
@@ -3444,6 +3458,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1453035661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453035657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2298d60245635d4a8c55ce6a292b1c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: "\uBAA8\uD5D8\uAC00"
+  _type: 0
+  _level: 1
+  _atk: 0
+  _equipAtk: 0
+  _arm: 0
+  _equipArm: 0
+  _cri: 0
+  _equipCri: 0
+  _hp: 0
+  _maxHp: 0
+  _equipMaxHp: 0
 --- !u!1 &1465526521
 GameObject:
   m_ObjectHideFlags: 0
@@ -4450,7 +4488,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1870154417}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2147283128}
+        m_TargetAssemblyTypeName: UI_Inventory, Assembly-CSharp
+        m_MethodName: Btn_EquipItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1870154417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4981,12 +5031,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c1825c4cf1d794dae75ff8aa9b8894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerGold: {fileID: 618881302}
   _itemSlot: {fileID: 1157170289}
   _playerInven: {fileID: 0}
   _addSlotNum: 4
   _slotPrefab: {fileID: 5885770076106608932, guid: 9ee07c7b26b58ec459b9082944c5d95a, type: 3}
   _slotContent: {fileID: 1157170289}
-  _selectedItemSlot: {fileID: 0}
+  _selectedItemIndex: 0
   _selectedItemIcon: {fileID: 1897927520}
   _selectedItemName: {fileID: 1645202891}
   _selectedItemType: {fileID: 1326433214}

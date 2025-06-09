@@ -16,10 +16,12 @@ MonoBehaviour:
   _info: "\uB124\uBAA8 \uBAA8\uC591\uC758 \uD1B1\uB2C8\uC785\uB2C8\uB2E4."
   _type: 2
   _icon: {fileID: -530572372, guid: 132358e9bf26b60458b731bf001e31db, type: 3}
+  _gold: 500
   _stackAble: 1
   _maxStackAmount: 9999
   _consumAbles: []
-  _equipAble: 0
-  _addAtk: 0
-  _addArm: 0
-  _addCri: 0
+  _equipAverageAble: 0
+  _equipAverageAtk: 0
+  _equipAverageArm: 0
+  _equipAverageCri: 0
+  _equipStatDeviation: 0

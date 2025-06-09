@@ -33,6 +33,7 @@ public class UI_Inventory : Singleton<UI_Inventory>
     {
         _playerInven = Singleton<Player>.Instance.Inventory;
         SlotUpdate();
+        InfoClear();
     }
     void Update()
     {
@@ -82,6 +83,44 @@ public class UI_Inventory : Singleton<UI_Inventory>
             _playerGold.text = _playerInven.InvenGold.ToString() + " G";
         }
     }
+    public void InfoUpdate(Item item, int index)
+    {
+        if (item.ItemData != null)
+        {
+            _selectedItemIcon.sprite = item.ItemData.GetIconSprite();
+            _selectedItemIcon.enabled = true;
+            _selectedItemIndex = index;
+            _selectedItemName.text = item.ItemData.GetName();
+            _selectedItemInfo.text = item.ItemData.GetInfo();
+            if (item.ItemData.GetItemType() == ItemType.EquipAble)
+            {
+                _selectedItemStat.text = $"공격력: {item.Stat.GetEquipAtk()}\n방어력 {item.Stat.GetEquipArm()}: \n치명타 확률 : {item.Stat.GetEquipCri()}";
+                _btnEquip.SetActive(true);
+            }
+            else
+            {
+                _selectedItemStat.text = $"소지 개수 : {item.ItemQuantity}";
+                _btnEquip.SetActive(false);
+            }
+            _btnEquip.GetComponentInChildren<TextMeshProUGUI>().text = item.IsEquipped ? "해제하기" : "장착하기";
+            _btnSell.SetActive(true);
+        }
+        else
+        {
+            InfoClear();
+        }
+    }
+    public void InfoClear()
+    {
+        _selectedItemIcon.enabled = false;
+        _selectedItemIndex = 0;
+        _selectedItemType.text = string.Empty;
+        _selectedItemName.text = string.Empty;
+        _selectedItemInfo.text = string.Empty;
+        _selectedItemStat.text = string.Empty;
+        _btnEquip.SetActive(false);
+        _btnSell.SetActive(false);
+    }
     public void AddItem(Item item)
     {
         // 장착 장비가 아닌 경우
@@ -118,15 +157,51 @@ public class UI_Inventory : Singleton<UI_Inventory>
         }
         SlotUpdate();
     }
-    public void Btn_SellItem()
+    public void AddSlots()
     {
+        // _addSlotNum 가 인벤토리 크기에 맞게 추가되는 아이템 슬롯 단위이므로 현재 아이템 슬롯 개수에 맞춰 단위 조정
+        int addNum = _addSlotNum - _slots.Count % _addSlotNum;
+        for (int i = 0; i < addNum; i++)
+        {
+            GameObject.Instantiate(_slotPrefab).transform.SetParent(_itemSlot.transform);
+        }
+        int contentHeight = _slots.Count / _addSlotNum;
+        _slotContent.sizeDelta = new Vector2(_slotContent.rect.width, 165 + contentHeight * 145);
+    }
+    public void Btn_EquipItem()
+    {
+        Item item = _playerInven.InvenList[_selectedItemIndex];
+        ItemSlot itemSlot = _slots[_selectedItemIndex];
+        if (item.ItemData != null && item != null)
+        {
+            if (!item.IsEquipped)
+            {
+                item.SetIsEquipped(true);
+                Singleton<Player>.Instance.Stat.SetEquipStat(item, true);
+            }
+            else
+            {
+                item.SetIsEquipped(false);
+                Singleton<Player>.Instance.Stat.SetEquipStat(item, false);
+            }
+            // 장착 여부에 따른 외곽선 활성화 토글
+            itemSlot.Set();
+        }
+        InfoUpdate(item, _selectedItemIndex);
+    }
+    public void Btn_SellItem()
+    { 
         Item item = _slots[_selectedItemIndex].Item;
         int itemgold = _playerInven.InvenList[_selectedItemIndex].ItemData.GetGold();
-        if (item.ItemData != null)
+        if (item.ItemData != null && item != null)
         {
             if (item.ItemData.GetItemType() == ItemType.EquipAble)
             {
-                //todo : 장착 중에 판매할 경우 상승한 능력치 감소
+                if (_playerInven.InvenList[_selectedItemIndex].IsEquipped)
+                {
+                    item.SetIsEquipped(false);
+                    Singleton<Player>.Instance.Stat.SetEquipStat(item, false);
+                }
 
                 _playerInven.SetInvenGold(_playerInven.InvenGold + itemgold);
                 _playerInven.DeletInvenItem(_selectedItemIndex);
@@ -148,49 +223,5 @@ public class UI_Inventory : Singleton<UI_Inventory>
             }
             SlotUpdate();
         }
-    }
-    public void AddSlots()
-    {
-        // _addSlotNum 가 인벤토리 크기에 맞게 추가되는 아이템 슬롯 단위이므로 현재 아이템 슬롯 개수에 맞춰 단위 조정
-        int addNum = _addSlotNum - _slots.Count % _addSlotNum;
-        for (int i = 0; i < addNum; i++)
-        {
-            GameObject.Instantiate(_slotPrefab).transform.SetParent(_itemSlot.transform);
-        }
-        int contentHeight = _slots.Count / _addSlotNum;
-        _slotContent.sizeDelta = new Vector2(_slotContent.rect.width, 165 + contentHeight * 145);
-    }
-    public void InfoUpdate(Item item, int index)
-    {
-        if (item.ItemData != null)
-        {
-            _selectedItemIcon.sprite = item.ItemData.GetIconSprite();
-            _selectedItemIcon.enabled = true;
-            _selectedItemIndex = index;
-            _selectedItemName.text = item.ItemData.GetName();
-            _selectedItemInfo.text = item.ItemData.GetInfo();
-            if (item.ItemData.GetItemType() == ItemType.EquipAble)
-            {
-                _selectedItemStat.text = $"공격력: {item.Stat.GetEquipAtk()}\n방어력 {item.Stat.GetEquipArm()}: \n치명타 확률 : {item.Stat.GetEquipCri()}";
-                _btnEquip.SetActive(true);
-            }
-            else
-            {
-                _selectedItemStat.text = $"소지 개수 : {item.ItemQuantity}";
-                _btnEquip.SetActive(false);
-            }
-            _btnSell.SetActive(true);
-        }
-        
-    }
-    void InfoClear()
-    {
-        _selectedItemIcon.enabled = false;
-        _selectedItemIndex = 0;
-        _selectedItemName.text = string.Empty;
-        _selectedItemInfo.text = string.Empty;
-        _selectedItemStat.text = string.Empty;
-        _btnEquip.SetActive(false);
-        _btnSell.SetActive(false);
     }
 }

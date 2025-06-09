@@ -17,6 +17,7 @@ MonoBehaviour:
     \uD65C\uC785\uB2C8\uB2E4."
   _type: 0
   _icon: {fileID: -1730254177, guid: 132358e9bf26b60458b731bf001e31db, type: 3}
+  _gold: 100
   _stackAble: 0
   _maxStackAmount: 0
   _consumAbles: []
