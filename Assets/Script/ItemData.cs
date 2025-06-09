@@ -38,10 +38,25 @@ public class ItemData : ScriptableObject
     [Header("소모품")]
     [SerializeField] private ItemDataConsumAble[] _consumAbles;
 
-    [Header("장착")]
-    [SerializeField] private bool _equiped;
+    [Header("장착 관련")]
+    [SerializeField] private bool _equipAverageAble;
+    [SerializeField] private float _equipAverageAtk;
+    [SerializeField] private float _equipAverageArm;
+    [SerializeField] private float _equipAverageCri;
+    // 장비 능력치 편차 
+    [SerializeField] private int _equipStatDeviation;
+    public int EquipStatDeviation => _equipStatDeviation;
 
-    
+    // 아이템 도감에 들어가는 평균적인 장비 능력치 (장비가 생성될 때 장비 능력치가 조금씩 다르도록 설정)
+    public float EquipAverageArm => _equipAverageArm;
+    public float EquipAverageCri => _equipAverageCri;
+
+    public float GetEquipAverageAtk()
+    { return _equipAverageAtk; }
+    public float GetEquipAverageArm()
+    { return _equipAverageArm; }
+    public float GetEquipAverageCri()
+    { return _equipAverageCri; }
     public string GetName()
     { return _itemName; }
     public string GetInfo()
@@ -56,6 +71,4 @@ public class ItemData : ScriptableObject
     { return _maxStackAmount; }
     public ItemDataConsumAble[] GetConsumAbles()
     { return _consumAbles; }
-    public bool GetEquiped()
-    { return _equiped; }
 }

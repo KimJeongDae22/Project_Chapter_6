@@ -31,10 +31,10 @@ public class ItemSlot : MonoBehaviour
         else
         {
             _itemIcon.enabled = true;
-            _itemIcon.sprite = _item.GetItemData().GetIconSprite();
-            _quipOutline.enabled = _item.GetItemData().GetEquiped();
+            _itemIcon.sprite = _item.ItemData.GetIconSprite();
+            //_quipOutline.enabled = _item.ItemData.GetEquiped();
 
-            int quantity = _item.GetItemQuantity();
+            int quantity = _item.ItemQuantity;
             // 소지량이 1개면 미표시, 1000개 이상이면 "+999" 로 표시해주는 함수
             QuantityNumbering(quantity);
         }
@@ -71,6 +71,13 @@ public class ItemSlot : MonoBehaviour
         else
         {
             _item = data;
+        }
+    }
+    public void Btn_SlotClick()
+    {
+        if (_item != null)
+        {
+            Singleton<UI_Inventory>.Instance.Btn_ItemSlotClick(_item);
         }
     }
 }

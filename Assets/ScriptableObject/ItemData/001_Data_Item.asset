@@ -20,4 +20,8 @@ MonoBehaviour:
   _stackAble: 0
   _maxStackAmount: 0
   _consumAbles: []
+  _equipAble: 1
   _equiped: 0
+  _addAtk: 10
+  _addArm: 0
+  _addCri: 10

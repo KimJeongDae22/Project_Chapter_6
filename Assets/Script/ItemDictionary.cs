@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +9,8 @@ public class ItemDictionary : Singleton<ItemDictionary>
 
     public Item GetItemOfDictionary(int itemCodeIndex)
     {
-        return itemDictionary[itemCodeIndex];
+        Item item = new Item();
+        item = itemDictionary[itemCodeIndex].DeepCopy();
+        return item;
     }
 }
