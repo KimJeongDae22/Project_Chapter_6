@@ -7,12 +7,15 @@ public struct Stat
     [SerializeField] private float _equipAtk;
     [SerializeField] private float _equipArm;
     [SerializeField] private float _equipCri;
+    [SerializeField] private float _equipMaxHp;
     public float GetEquipAtk()
     { return _equipAtk; }
     public float GetEquipArm()
     { return _equipArm; }
     public float GetEquipCri()
     { return _equipCri; }
+    public float GetEquipMaxHp()
+    { return _equipMaxHp; }
     public void SetEquipAtk(float a)
     {
         if (a < 0)
@@ -36,6 +39,14 @@ public struct Stat
             a = 0;
         }
         _equipCri = a;
+    }
+    public void SetEquipMaxHp(float a)
+    {
+        if (a < 0)
+        {
+            a = 0;
+        }
+        _equipMaxHp = a;
     }
 }
 [Serializable]
@@ -65,11 +76,12 @@ public class Item
         float initAtk = _itemData.GetEquipAverageAtk() == 0 ? 0 : _itemData.GetEquipAverageAtk() + CustomMathod.RandomRangeSymmetry(statDeviation);
         float initArm = _itemData.GetEquipAverageArm() == 0 ? 0 : _itemData.GetEquipAverageArm() + CustomMathod.RandomRangeSymmetry(statDeviation);
         float initCri = _itemData.GetEquipAverageCri() == 0 ? 0 : _itemData.GetEquipAverageCri() + CustomMathod.RandomRangeSymmetry(statDeviation);
-
+        float initMaxHp = _itemData.GetEquipAverageMaxHp() == 0 ? 0 : _itemData.GetEquipAverageMaxHp() + CustomMathod.RandomRangeSymmetry(statDeviation * 5);
         // 초기값이 0이 아니지만 편차로 인해 음수값이 될 경우의 처리는 아래 함수들에 포함되어 있음
         _stat.SetEquipAtk(initAtk);
         _stat.SetEquipArm(initArm);
         _stat.SetEquipCri(initCri);
+        _stat.SetEquipMaxHp(initMaxHp);
     }
     public void SetItemQuantity(int a)
     { _itemQuantity = a; }

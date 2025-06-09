@@ -27,5 +27,6 @@ public class Player_Stat : Creature
         _equipAtk += plusStat ? (int)item.Stat.GetEquipAtk() : -(int)item.Stat.GetEquipAtk();
         _equipArm += plusStat ? (int)item.Stat.GetEquipArm() : -(int)item.Stat.GetEquipArm();
         _equipCri += plusStat ? (int)item.Stat.GetEquipCri() : -(int)item.Stat.GetEquipCri();
+        _equipMaxHp += plusStat ? (int)item.Stat.GetEquipMaxHp() : -(int)item.Stat.GetEquipMaxHp();
     }
 }

@@ -44,6 +44,7 @@ public class ItemData : ScriptableObject
     [SerializeField] private float _equipAverageAtk;
     [SerializeField] private float _equipAverageArm;
     [SerializeField] private float _equipAverageCri;
+    [SerializeField] private float _equipAverageMaxHp;
     // 장비 능력치 편차 
     [SerializeField] private int _equipStatDeviation;
     public int EquipStatDeviation => _equipStatDeviation;
@@ -55,7 +56,8 @@ public class ItemData : ScriptableObject
     { return _equipAverageArm; }
     public float GetEquipAverageCri()
     { return _equipAverageCri; }
-
+    public float GetEquipAverageMaxHp()
+    { return _equipAverageMaxHp; }
     public string GetName()
     { return _itemName; }
     public string GetInfo()

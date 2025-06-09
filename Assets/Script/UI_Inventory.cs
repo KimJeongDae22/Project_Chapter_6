@@ -31,6 +31,7 @@ public class UI_Inventory : Singleton<UI_Inventory>
 
     void Start()
     {
+        this.gameObject.SetActive(false);
         _playerInven = Singleton<Player>.Instance.Inventory;
         SlotUpdate();
         InfoClear();
@@ -48,6 +49,14 @@ public class UI_Inventory : Singleton<UI_Inventory>
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             AddItem(Singleton<ItemDictionary>.Instance.GetItemOfDictionary(1));
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            AddItem(Singleton<ItemDictionary>.Instance.GetItemOfDictionary(2));
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            AddItem(Singleton<ItemDictionary>.Instance.GetItemOfDictionary(3));
         }
     }
     public void SlotUpdate()
@@ -94,7 +103,8 @@ public class UI_Inventory : Singleton<UI_Inventory>
             _selectedItemInfo.text = item.ItemData.GetInfo();
             if (item.ItemData.GetItemType() == ItemType.EquipAble)
             {
-                _selectedItemStat.text = $"공격력: {item.Stat.GetEquipAtk()}\n방어력 {item.Stat.GetEquipArm()}: \n치명타 확률 : {item.Stat.GetEquipCri()}";
+                _selectedItemStat.text = $"공격력 : {item.Stat.GetEquipAtk()}\n방어력 : {item.Stat.GetEquipArm()}\n";
+                _selectedItemStat.text += $"치명타 확률 : {item.Stat.GetEquipCri()}\n최대 체력 : {item.Stat.GetEquipMaxHp()}";
                 _btnEquip.SetActive(true);
             }
             else
