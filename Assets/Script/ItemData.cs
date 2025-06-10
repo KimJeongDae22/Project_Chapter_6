@@ -11,6 +11,13 @@ public enum ConsumType
     HpHeal,
     ManaHeal
 }
+public enum EquipType
+{
+    None,
+    Weapon,
+    Shield,
+    Accessory
+}
 [Serializable]
 public class ItemDataConsumAble
 {
@@ -40,7 +47,8 @@ public class ItemData : ScriptableObject
     [SerializeField] private ItemDataConsumAble[] _consumAbles;
 
     [Header("장착 관련")]
-    [SerializeField] private bool _equipAverageAble;
+    [SerializeField] private EquipType _equipType;
+
     [SerializeField] private float _equipAverageAtk;
     [SerializeField] private float _equipAverageArm;
     [SerializeField] private float _equipAverageCri;
@@ -50,6 +58,8 @@ public class ItemData : ScriptableObject
     public int EquipStatDeviation => _equipStatDeviation;
 
     // 아이템 도감에 들어가는 평균적인 장비 능력치 (장비가 생성될 때 장비 능력치가 조금씩 다르도록 설정)
+    public EquipType GetEquipType()
+        { return _equipType; }
     public float GetEquipAverageAtk()
     { return _equipAverageAtk; }
     public float GetEquipAverageArm()

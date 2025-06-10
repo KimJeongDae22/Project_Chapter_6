@@ -21,8 +21,9 @@ MonoBehaviour:
   _stackAble: 0
   _maxStackAmount: 0
   _consumAbles: []
-  _equipAverageAble: 0
+  _equipType: 1
   _equipAverageAtk: 10
   _equipAverageArm: 0
   _equipAverageCri: 10
+  _equipAverageMaxHp: 0
   _equipStatDeviation: 3

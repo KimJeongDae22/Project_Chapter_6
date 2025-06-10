@@ -17,12 +17,13 @@ MonoBehaviour:
     \uC788\uC744 \uAC83\uC73C\uB85C \uBCF4\uC774\uB294 \uBC29\uD328\uC785\uB2C8\uB2E4."
   _type: 0
   _icon: {fileID: -2081245629, guid: 132358e9bf26b60458b731bf001e31db, type: 3}
-  _gold: 0
+  _gold: 100
   _stackAble: 0
   _maxStackAmount: 0
   _consumAbles: []
-  _equipAverageAble: 0
+  _equipType: 2
   _equipAverageAtk: 0
   _equipAverageArm: 10
   _equipAverageCri: 0
+  _equipAverageMaxHp: 100
   _equipStatDeviation: 3

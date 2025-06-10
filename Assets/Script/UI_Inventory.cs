@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -169,6 +170,7 @@ public class UI_Inventory : Singleton<UI_Inventory>
             AddSlots();
         }
         SlotUpdate();
+        InfoUpdate(_slots[_selectedItemIndex].Item, _selectedItemIndex);
     }
     public void AddSlots()
     {
@@ -189,6 +191,20 @@ public class UI_Inventory : Singleton<UI_Inventory>
         {
             if (!item.IsEquipped)
             {
+                // 중복 부위 착용 시 기존 장착 장비 해제 반복문
+                for (int i = 0; i < _playerInven.InvenList.Count; i++)
+                {
+                    // 착용하고자 하는 장비는 제외
+                    if (i != _selectedItemIndex)
+                    {
+                        if (item.ItemData == _playerInven.InvenList[i].ItemData && _playerInven.InvenList[i].IsEquipped == true)
+                        {
+                            _playerInven.InvenList[i].SetIsEquipped(false);
+                            Singleton<Player>.Instance.Stat.SetEquipStat(_playerInven.InvenList[i], false);
+                            _slots[i].Set();
+                        }
+                    }
+                }
                 item.SetIsEquipped(true);
                 Singleton<Player>.Instance.Stat.SetEquipStat(item, true);
             }
@@ -214,6 +230,7 @@ public class UI_Inventory : Singleton<UI_Inventory>
                 {
                     item.SetIsEquipped(false);
                     Singleton<Player>.Instance.Stat.SetEquipStat(item, false);
+                    _slots[_selectedItemIndex].Set();
                 }
 
                 _playerInven.SetInvenGold(_playerInven.InvenGold + itemgold);
@@ -226,7 +243,7 @@ public class UI_Inventory : Singleton<UI_Inventory>
                 {
                     _playerInven.InvenList[_selectedItemIndex].SetItemQuantity(item.ItemQuantity - 1);
                     _playerInven.SetInvenGold(_playerInven.InvenGold + itemgold);
-                    InfoUpdate(_playerInven.InvenList[_selectedItemIndex], _selectedItemIndex);
+                    InfoUpdate(_slots[_selectedItemIndex].Item, _selectedItemIndex);
                 }
                 else
                 {
