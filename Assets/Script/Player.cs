@@ -11,6 +11,7 @@ public class Player : Singleton<Player>
     {
         _inventory = GetComponent<Player_Inventory>();
         _stat = GetComponent<Player_Stat>();
+
         if (_inventory == null)
         {
             this.gameObject.AddComponent<Player_Inventory>();

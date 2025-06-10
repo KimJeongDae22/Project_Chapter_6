@@ -78,14 +78,34 @@ public class ItemSlot : MonoBehaviour
     }
     public void Btn_SlotClick()
     {
+        var invenUI = Singleton<UI_Inventory>.Instance;
         if (_item != null)
         {
             if (_item.ItemData != null)
-            { Singleton<UI_Inventory>.Instance.InfoUpdate(_item, _itemIndex); }
+            {
+                // 아이템 설명창이 비활성화일 경우 설명창 업데이트(아이템 아이콘 활성화 여부로 판단)
+                if (invenUI.SelectedItemIcon.enabled == false)
+                {
+                    invenUI.InfoUpdate(_item, _itemIndex);
+                }
+                else
+                {
+                    // 아이콘 활성화 중이어도 다른 아이템를 누를 경우 그 아이템 정보 출력
+                    if (invenUI.SelectedItemIndex != _itemIndex)
+                    {
+                        invenUI.InfoUpdate(_item, _itemIndex);
+                    }
+                    // 같은 아이템을 두 번 클릭하면 출력되어 있는 정보창 내용 지우기
+                    else
+                    {
+                        invenUI.InfoClear();
+                    }
+                }
+            }
         }
         else
         {
-            Singleton<UI_Inventory>.Instance.InfoClear();
+            invenUI.InfoClear();
         }
     }
 }

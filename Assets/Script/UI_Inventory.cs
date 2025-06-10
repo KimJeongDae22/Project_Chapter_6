@@ -24,6 +24,9 @@ public class UI_Inventory : Singleton<UI_Inventory>
     [SerializeField] private TextMeshProUGUI _selectedItemStat;
     [SerializeField] private GameObject _btnEquip;
     [SerializeField] private GameObject _btnSell;
+    
+    public Image SelectedItemIcon => _selectedItemIcon;
+    public int SelectedItemIndex => _selectedItemIndex;
 
     [Header("아이템 슬롯")]
     [SerializeField] private List<ItemSlot> _slots;
