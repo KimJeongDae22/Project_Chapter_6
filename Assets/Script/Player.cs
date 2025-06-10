@@ -4,8 +4,8 @@ public class Player : Singleton<Player>
 {
     [SerializeField] private Player_Inventory _inventory;
     [SerializeField] private Player_Stat _stat;
-    public Player_Inventory Inventory => _inventory;
-    public Player_Stat Stat => _stat;
+    public Player_Inventory Inventory { get { return _inventory; } }
+    public Player_Stat Stat { get { return _stat; } }
 
     private void Start()
     {

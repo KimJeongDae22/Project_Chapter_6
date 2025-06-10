@@ -8,12 +8,12 @@ public class ItemSlot : MonoBehaviour
     [SerializeField] private int _itemIndex;
     [SerializeField] private Image _itemIcon;
     [SerializeField] private TextMeshProUGUI _itemQuantity;
-    [SerializeField] private Outline _quipOutline;
+    [SerializeField] private Outline _equipOutline;
     [SerializeField] private UI_Inventory _inventory;
-    public Item Item => _item;
-    public int ItemIndex => _itemIndex;
-    public Image ItemIcon => _itemIcon;
-    public Outline QuipOutline => _quipOutline;
+    public Item Item { get { return _item; } set { _item = value; } }
+    public int ItemIndex { get { return _itemIndex; } set { _itemIndex = value; } }
+    public Image ItemIcon { get { return _itemIcon; } set { _itemIcon = value; } }
+    public Outline QuipOutline { get { return _equipOutline; } set { _equipOutline = value; } }
 
     [SerializeField] private bool _emptySlot = false;
     void Awake()
@@ -22,7 +22,7 @@ public class ItemSlot : MonoBehaviour
         _itemIcon = this.transform.GetChild(0).GetComponent<Image>();
         _itemIcon.enabled = false;
         _itemQuantity = this.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        _quipOutline = GetComponent<Outline>();
+        _equipOutline = GetComponent<Outline>();
     }
     public void Set()
     {
@@ -33,8 +33,8 @@ public class ItemSlot : MonoBehaviour
         else
         {
             _itemIcon.enabled = true;
-            _itemIcon.sprite = _item.ItemData.GetIconSprite();
-            _quipOutline.enabled = _item.IsEquipped;
+            _itemIcon.sprite = _item.ItemData.IconSprite;
+            _equipOutline.enabled = _item.IsEquipped;
 
             int quantity = _item.ItemQuantity;
             // 소지량이 1개면 미표시, 1000개 이상이면 "+999" 로 표시해주는 함수

@@ -58,30 +58,17 @@ public class ItemData : ScriptableObject
     public int EquipStatDeviation => _equipStatDeviation;
 
     // 아이템 도감에 들어가는 평균적인 장비 능력치 (장비가 생성될 때 장비 능력치가 조금씩 다르도록 설정)
-    public EquipType GetEquipType()
-        { return _equipType; }
-    public float GetEquipAverageAtk()
-    { return _equipAverageAtk; }
-    public float GetEquipAverageArm()
-    { return _equipAverageArm; }
-    public float GetEquipAverageCri()
-    { return _equipAverageCri; }
-    public float GetEquipAverageMaxHp()
-    { return _equipAverageMaxHp; }
-    public string GetName()
-    { return _itemName; }
-    public string GetInfo()
-    { return _info; }
-    public ItemType GetItemType()
-    { return _type; }
-    public Sprite GetIconSprite()
-    { return _icon; }
-    public int GetGold()
-    { return _gold; }
-    public bool GetStackAble()
-    { return _stackAble; }
-    public int GetMaxStackAmount()
-    { return _maxStackAmount; }
-    public ItemDataConsumAble[] GetConsumAbles()
-    { return _consumAbles; }
+    public EquipType EquipType { get { return _equipType; } }
+    public float EquipAverageAtk { get { return _equipAverageAtk; } }
+    public float EquipAverageArm { get { return _equipAverageArm; } }
+    public float EquipAverageCri { get { return _equipAverageCri; } }
+    public float EquipAverageMaxHp { get { return _equipAverageMaxHp; } }
+    public string ItemName { get { return _itemName; } }
+    public string Info { get { return _info; } }
+    public ItemType Type { get { return _type; } }
+    public Sprite IconSprite { get { return _icon; } }
+    public int Gold { get { return _gold; } }
+    public bool StackAble {  get { return _stackAble; } }
+    public int MaxStackAmount {  get { return _maxStackAmount; } }
+    public ItemDataConsumAble[] ConsumAbles { get { return _consumAbles; } }
 }

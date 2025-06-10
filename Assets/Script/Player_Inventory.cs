@@ -73,10 +73,10 @@ public class Item
         int statDeviation = itemdata.EquipStatDeviation;
         // 장비 능력치가 각 장비마다 있는 편차값만큼 랜덤으로 결정
         // 장비 능력치가 0일 경우 편차 적용 없이 0으로 설정 (삼항 연산자 사용)
-        float initAtk = _itemData.GetEquipAverageAtk() == 0 ? 0 : _itemData.GetEquipAverageAtk() + CustomMathod.RandomRangeSymmetry(statDeviation);
-        float initArm = _itemData.GetEquipAverageArm() == 0 ? 0 : _itemData.GetEquipAverageArm() + CustomMathod.RandomRangeSymmetry(statDeviation);
-        float initCri = _itemData.GetEquipAverageCri() == 0 ? 0 : _itemData.GetEquipAverageCri() + CustomMathod.RandomRangeSymmetry(statDeviation);
-        float initMaxHp = _itemData.GetEquipAverageMaxHp() == 0 ? 0 : _itemData.GetEquipAverageMaxHp() + CustomMathod.RandomRangeSymmetry(statDeviation * 5);
+        float initAtk = _itemData.EquipAverageAtk == 0 ? 0 : _itemData.EquipAverageAtk + CustomMathod.RandomRangeSymmetry(statDeviation);
+        float initArm = _itemData.EquipAverageArm == 0 ? 0 : _itemData.EquipAverageArm + CustomMathod.RandomRangeSymmetry(statDeviation);
+        float initCri = _itemData.EquipAverageCri == 0 ? 0 : _itemData.EquipAverageCri + CustomMathod.RandomRangeSymmetry(statDeviation);
+        float initMaxHp = _itemData.EquipAverageMaxHp == 0 ? 0 : _itemData.EquipAverageMaxHp + CustomMathod.RandomRangeSymmetry(statDeviation * 5);
         // 초기값이 0이 아니지만 편차로 인해 음수값이 될 경우의 처리는 아래 함수들에 포함되어 있음
         _stat.SetEquipAtk(initAtk);
         _stat.SetEquipArm(initArm);
@@ -96,10 +96,8 @@ public class Player_Inventory : MonoBehaviour
     [SerializeField] private List<Item> _invenList = new List<Item>();
     [SerializeField] private int _invenGold;
 
-    public List<Item> InvenList => _invenList;
-    public int InvenGold => _invenGold;
+    public List<Item> InvenList  { get { return _invenList; } }
+    public int InvenGold { get { return _invenGold; } set { _invenGold = value; } }
     public void DeletInvenItem(int index)
     {  _invenList.RemoveAt(index); }
-    public void SetInvenGold(int a)
-        { _invenGold = a; }
 }

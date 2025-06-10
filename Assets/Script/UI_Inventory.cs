@@ -26,8 +26,8 @@ public class UI_Inventory : Singleton<UI_Inventory>
     [SerializeField] private GameObject _btnEquip;
     [SerializeField] private GameObject _btnSell;
     
-    public Image SelectedItemIcon => _selectedItemIcon;
-    public int SelectedItemIndex => _selectedItemIndex;
+    public Image SelectedItemIcon { get { return _selectedItemIcon; } set { _selectedItemIcon = value; } }
+    public int SelectedItemIndex { get { return _selectedItemIndex; } set { _selectedItemIndex = value; } }
 
     [Header("아이템 슬롯")]
     [SerializeField] private List<ItemSlot> _slots;
@@ -100,12 +100,12 @@ public class UI_Inventory : Singleton<UI_Inventory>
     {
         if (item.ItemData != null)
         {
-            _selectedItemIcon.sprite = item.ItemData.GetIconSprite();
+            _selectedItemIcon.sprite = item.ItemData.IconSprite;
             _selectedItemIcon.enabled = true;
             _selectedItemIndex = index;
-            _selectedItemName.text = item.ItemData.GetName();
-            _selectedItemInfo.text = item.ItemData.GetInfo();
-            if (item.ItemData.GetItemType() == ItemType.EquipAble)
+            _selectedItemName.text = item.ItemData.ItemName;
+            _selectedItemInfo.text = item.ItemData.Info;
+            if (item.ItemData.Type == ItemType.EquipAble)
             {
                 _selectedItemStat.text = $"공격력 : {item.Stat.GetEquipAtk()}\n방어력 : {item.Stat.GetEquipArm()}\n";
                 _selectedItemStat.text += $"치명타 확률 : {item.Stat.GetEquipCri()}\n최대 체력 : {item.Stat.GetEquipMaxHp()}";
@@ -138,7 +138,7 @@ public class UI_Inventory : Singleton<UI_Inventory>
     public void AddItem(Item item)
     {
         // 장착 장비가 아닌 경우
-        if (item.ItemData.GetItemType() != ItemType.EquipAble)
+        if (item.ItemData.Type != ItemType.EquipAble)
         {
             bool added = false;
             // 추가하려는 아이템이 플레이어 인벤에 이미 존재하는지 확인
@@ -147,7 +147,7 @@ public class UI_Inventory : Singleton<UI_Inventory>
                 Item checkedItem = _playerInven.InvenList[i];
                 if (checkedItem.ItemData == item.ItemData)
                 {
-                    if (checkedItem.ItemData.GetStackAble())
+                    if (checkedItem.ItemData.StackAble)
                     {
                         checkedItem.SetItemQuantity(checkedItem.ItemQuantity + 1);
                         added = true;
@@ -221,10 +221,10 @@ public class UI_Inventory : Singleton<UI_Inventory>
     public void Btn_SellItem()
     { 
         Item item = _slots[_selectedItemIndex].Item;
-        int itemgold = _playerInven.InvenList[_selectedItemIndex].ItemData.GetGold();
+        int itemgold = _playerInven.InvenList[_selectedItemIndex].ItemData.Gold;
         if (item.ItemData != null && item != null)
         {
-            if (item.ItemData.GetItemType() == ItemType.EquipAble)
+            if (item.ItemData.Type == ItemType.EquipAble)
             {
                 if (_playerInven.InvenList[_selectedItemIndex].IsEquipped)
                 {
@@ -233,7 +233,7 @@ public class UI_Inventory : Singleton<UI_Inventory>
                     _slots[_selectedItemIndex].Set();
                 }
 
-                _playerInven.SetInvenGold(_playerInven.InvenGold + itemgold);
+                _playerInven.InvenGold += itemgold;
                 _playerInven.DeletInvenItem(_selectedItemIndex);
                 InfoClear();
             }
@@ -242,7 +242,7 @@ public class UI_Inventory : Singleton<UI_Inventory>
                 if (item.ItemQuantity > 1)
                 {
                     _playerInven.InvenList[_selectedItemIndex].SetItemQuantity(item.ItemQuantity - 1);
-                    _playerInven.SetInvenGold(_playerInven.InvenGold + itemgold);
+                    _playerInven.InvenGold += itemgold;
                     InfoUpdate(_slots[_selectedItemIndex].Item, _selectedItemIndex);
                 }
                 else
