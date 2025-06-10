@@ -8,10 +8,8 @@ public enum PlayerClassType
 }
 public class Player_Stat : MonoBehaviour
 {
-    /*
-    public string PlayerName => _name;
-    public StatType PlayerType => _type;
-    */
+    // 원래 CommonStat 을 상속받아서 하려 했으나 인스펙터 창이 너무 길어져서 불-편하므로 생성자로 구현함. 
+    // 인스펙터에서 구조체의 표시를 토글로 할 수 있어서 좋긴 하지만 코드적으로는 상속이 더 좋아보임.
     [SerializeField] private CommonStat _playerStat;
     [SerializeField] private PlayerClassType _playerClass;
     [SerializeField] private int _MaxExp;
