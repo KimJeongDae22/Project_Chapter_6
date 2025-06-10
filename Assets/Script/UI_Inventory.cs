@@ -69,8 +69,15 @@ public class UI_Inventory : MonoBehaviour
         {
             return;
         }
-        // UI 에 있는 아이템 슬롯만큼 리스트로 생성
         _slots = _itemSlot.GetComponentsInChildren<ItemSlot>().ToList();
+
+        // 플레이어가 가지고 있는 아이템 수가 현재 인벤토리 슬롯 수보다 많으면 슬롯 보충
+        while (_playerInven.InvenList.Count > _slots.Count)
+        {
+            AddSlots();
+            // UI 에 있는 아이템 슬롯만큼 리스트로 생성
+            _slots = _itemSlot.GetComponentsInChildren<ItemSlot>().ToList();
+        }
 
         for (int i = 0; i < _slots.Count; i++)
         {
@@ -164,10 +171,6 @@ public class UI_Inventory : MonoBehaviour
         else
         {
             _playerInven.InvenList.Add(item);
-        }
-        if (_playerInven.InvenList.Count > _slots.Count)
-        {
-            AddSlots();
         }
         SlotUpdate();
         InfoUpdate(_slots[_selectedItemIndex].Item, _selectedItemIndex);

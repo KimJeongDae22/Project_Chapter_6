@@ -18,6 +18,5 @@ public class UI_PlayerInfo : MonoBehaviour
         _playerName.text = playerstat.PlayerStat.Name;
         _expAmount.text = $"{playerstat.Exp} / {playerstat.MaxExp}";
         _expAmountSlider.value = (float) playerstat.Exp / (float) playerstat.MaxExp;
-        Debug.Log(playerstat.Exp / playerstat.MaxExp);
     }
 }

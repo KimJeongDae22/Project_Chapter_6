@@ -4850,7 +4850,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ed3de2392020748a8c07f4702f652a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _invenList: []
+  _invenList:
+  - _itemData: {fileID: 11400000, guid: 4a531c3999851b14a93184fe3e3f4439, type: 2}
+    _itemQuantity: 1
+    _stat:
+      _equipAtk: 11
+      _equipArm: 0
+      _equipCri: 11
+      _equipMaxHp: 0
+    _isEquipped: 0
+  - _itemData: {fileID: 11400000, guid: 4a531c3999851b14a93184fe3e3f4439, type: 2}
+    _itemQuantity: 1
+    _stat:
+      _equipAtk: 11
+      _equipArm: 0
+      _equipCri: 11
+      _equipMaxHp: 0
+    _isEquipped: 0
+  - _itemData: {fileID: 11400000, guid: 4a531c3999851b14a93184fe3e3f4439, type: 2}
+    _itemQuantity: 1
+    _stat:
+      _equipAtk: 11
+      _equipArm: 0
+      _equipCri: 11
+      _equipMaxHp: 0
+    _isEquipped: 0
+  - _itemData: {fileID: 11400000, guid: 4a531c3999851b14a93184fe3e3f4439, type: 2}
+    _itemQuantity: 1
+    _stat:
+      _equipAtk: 11
+      _equipArm: 0
+      _equipCri: 11
+      _equipMaxHp: 0
+    _isEquipped: 0
+  - _itemData: {fileID: 11400000, guid: 4a531c3999851b14a93184fe3e3f4439, type: 2}
+    _itemQuantity: 1
+    _stat:
+      _equipAtk: 11
+      _equipArm: 0
+      _equipCri: 11
+      _equipMaxHp: 0
+    _isEquipped: 0
+  - _itemData: {fileID: 11400000, guid: 4a531c3999851b14a93184fe3e3f4439, type: 2}
+    _itemQuantity: 1
+    _stat:
+      _equipAtk: 11
+      _equipArm: 0
+      _equipCri: 11
+      _equipMaxHp: 0
+    _isEquipped: 0
+  - _itemData: {fileID: 11400000, guid: 4a531c3999851b14a93184fe3e3f4439, type: 2}
+    _itemQuantity: 1
+    _stat:
+      _equipAtk: 11
+      _equipArm: 0
+      _equipCri: 11
+      _equipMaxHp: 0
+    _isEquipped: 0
+  - _itemData: {fileID: 11400000, guid: 4a531c3999851b14a93184fe3e3f4439, type: 2}
+    _itemQuantity: 1
+    _stat:
+      _equipAtk: 11
+      _equipArm: 0
+      _equipCri: 11
+      _equipMaxHp: 0
+    _isEquipped: 0
+  - _itemData: {fileID: 11400000, guid: 4a531c3999851b14a93184fe3e3f4439, type: 2}
+    _itemQuantity: 1
+    _stat:
+      _equipAtk: 11
+      _equipArm: 0
+      _equipCri: 11
+      _equipMaxHp: 0
+    _isEquipped: 0
   _invenGold: 1000
 --- !u!114 &1453035659
 MonoBehaviour:
