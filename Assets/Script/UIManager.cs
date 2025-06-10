@@ -12,9 +12,18 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private TextMeshProUGUI _uiStatusArm;
     [SerializeField] private TextMeshProUGUI _uiStatusCri;
     [SerializeField] private TextMeshProUGUI _uiStatusMaxHp;
+
+    public GameObject UIDefault { get { return _uiDefault; } }
+    public UI_Inventory UIInventory { get { return _uiInventory.GetComponent<UI_Inventory>(); } }
+    public GameObject UIStatus { get { return _uiStatus; } }
     private void Start()
     {
+        PlayerInfoUpdate();
         _uiStatus.SetActive(false);
+    }
+    public void PlayerInfoUpdate()
+    {
+        _uiDefault.GetComponentInChildren<UI_PlayerInfo>().SetPlayerInfo();
     }
     public void StatusUpdate()
     {
@@ -27,6 +36,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void Btn_OnDefaultUI()
     {
+        PlayerInfoUpdate();
         _uiDefault.SetActive(true);
         _uiInventory.SetActive(false);
         _uiStatus.SetActive(false);

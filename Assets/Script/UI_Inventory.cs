@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Inventory : Singleton<UI_Inventory>
+public class UI_Inventory : MonoBehaviour
 {
     [Header("골드")]
     [SerializeField] private TextMeshProUGUI _playerGold;

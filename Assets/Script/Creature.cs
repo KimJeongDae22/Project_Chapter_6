@@ -45,6 +45,7 @@ public class CommonStat
     private int _otherMaxHp;
     public int TotalMaxHp => _maxHp + _equipMaxHp + _otherMaxHp;
 
+    public string Name { get { return _name; } set { _name = value; } }
     public int Level => _level;
 
     public int Atk { get { return _atk; } set { _atk = value; } }
@@ -60,10 +61,6 @@ public class CommonStat
     public int MaxHp { get { return _maxHp; } set { _maxHp = value; } }
     public int EquipMaxHp { get { return _equipMaxHp; } set { _equipMaxHp = value; } }
 
-    public void SetStat(ValueType a)
-    {
-
-    }
     public virtual void InitStat(int atk, int arm, int cri, int maxHp, StatType type)
     {
         _atk = atk;

@@ -9,16 +9,13 @@ public class ItemSlot : MonoBehaviour
     [SerializeField] private Image _itemIcon;
     [SerializeField] private TextMeshProUGUI _itemQuantity;
     [SerializeField] private Outline _equipOutline;
-    [SerializeField] private UI_Inventory _inventory;
     public Item Item { get { return _item; } set { _item = value; } }
     public int ItemIndex { get { return _itemIndex; } set { _itemIndex = value; } }
     public Image ItemIcon { get { return _itemIcon; } set { _itemIcon = value; } }
     public Outline QuipOutline { get { return _equipOutline; } set { _equipOutline = value; } }
 
-    [SerializeField] private bool _emptySlot = false;
     void Awake()
     {
-        _inventory = GetComponentInParent<UI_Inventory>();
         _itemIcon = this.transform.GetChild(0).GetComponent<Image>();
         _itemIcon.enabled = false;
         _itemQuantity = this.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
@@ -68,7 +65,6 @@ public class ItemSlot : MonoBehaviour
         if (data == null)
         {
             _item = null;
-            _emptySlot = true;
         }
         else
         {
@@ -78,7 +74,7 @@ public class ItemSlot : MonoBehaviour
     }
     public void Btn_SlotClick()
     {
-        var invenUI = Singleton<UI_Inventory>.Instance;
+        var invenUI = Singleton<UIManager>.Instance.UIInventory;
         if (_item != null)
         {
             if (_item.ItemData != null)
