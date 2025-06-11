@@ -111,6 +111,7 @@ public class UI_Inventory : MonoBehaviour
             _selectedItemIcon.enabled = true;
             _selectedItemIndex = index;
             _selectedItemName.text = item.ItemData.ItemName;
+            _selectedItemType.text = CustomMathod.ItemTypeString(item);
             _selectedItemInfo.text = item.ItemData.Info;
             if (item.ItemData.Type == ItemType.EquipAble)
             {
